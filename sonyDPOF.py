@@ -17,11 +17,25 @@ for loc in dpof_locations:
     if os.path.exists(sd_card_root + loc):
         print("DPOF File found at: "+loc)
         found = True
-        dpof_file_path = loc
+        dpof_file_path = sd_card_root + loc
+        with open(dpof_file_path, 'r') as file:
+            lines = file.readlines()
+        for line in lines:
+            if line.strip().startswith('GEN CRT'):
+                start_idx = line.find('"') + 1
+                end_idx = line.rfind('"')
+                print("Camera name: " + line[start_idx:end_idx])
 if found == False:
     print("DPOF File could not be found automatically! Please enter it manually.")
     print("DPOF File path: ")
     dpof_file_path = input()
+    with open(dpof_file_path, 'r') as file:
+            lines = file.readlines()
+    for line in lines:
+        if line.strip().startswith('GEN CRT'):
+            start_idx = line.find('"') + 1
+            end_idx = line.rfind('"')
+            print("Camera name: " + line[start_idx:end_idx])
 print("Destination folder:")
 destination_folder = input()
 
