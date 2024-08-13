@@ -9,4 +9,4 @@ Requires python!
 4. Type Destination path (ex. ``C:/some_folder``)
 5. Watch files copy
 
-If you want to un-dpof images just delete the AUTPRINT file!
+If you want to un-dpof images just type Y on last step to remove the AUTPRINT file!
