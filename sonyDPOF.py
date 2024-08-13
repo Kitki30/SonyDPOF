@@ -5,10 +5,23 @@ print("Welcome to Kitki30's SONY DPOF Reader")
 print("Reads images from DPOF file and copies it to folder on your PC!")
 print("Warning all folder / file locations must have '/' instead of '\'")
 print("Script tested on Sony Cybershot DSC-H10 camera!")
-print("DPOF File path: ")
-dpof_file_path = input()
 print("Camera / Memory Stick location: ")
 sd_card_root = input()
+print("Trying to auto find DPOF File")
+# DPOF searching locations
+# Please contribute if you have seen other dpof location
+dpof_locations = ['MISC/AUTPRINT.MRK']
+found = False
+dpof_file_path = ""
+for loc in dpof_locations:
+    if os.path.exists(sd_card_root + loc):
+        print("DPOF File found at: "+loc)
+        found = True
+        dpof_file_path = loc
+if found == False:
+    print("DPOF File could not be found automatically! Please enter it manually.")
+    print("DPOF File path: ")
+    dpof_file_path = input()
 print("Destination folder:")
 destination_folder = input()
 
@@ -33,3 +46,11 @@ for line in lines:
             print(f"Error copying {image_path}: {e}")
 
 print("All files copied.")
+
+print("Delete DPOF File? (Y/N)")
+if str.lower(input()) == "y":
+    print("Removing DPOF File...")
+    os.remove(dpof_file_path)
+elif str.lower(input()) == "yes":
+    print("Removing DPOF File...")
+    os.remove(dpof_file_path)
